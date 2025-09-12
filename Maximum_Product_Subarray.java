@@ -1,11 +1,14 @@
 public class Maximum_Product_Subarray {
     static public int MPS(int nums[]) {
-        // int n = nums.length;
-        int maxProd = nums[0], currProd = nums[0];
-        for (int i : nums) {
-            currProd = Math.max(currProd * i, i);
-            if (currProd > maxProd)
-                maxProd = currProd;
+        int maxProd=Integer.MIN_VALUE;
+        int pre=1,suff=1;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            if(pre==0) pre=1;
+            if(suff==0) suff=1;
+            pre*=nums[i];
+            suff*=nums[n-1-i];
+            maxProd=Math.max(maxProd,Math.max(pre,suff));
         }
         return maxProd;
     }
